@@ -24,4 +24,7 @@ const WhitelistSchema: Schema = new Schema({
     }
 });
 
-export default mongoose.model<WhitelistPlayer>("whitelist", WhitelistSchema, "whitelist")
+export default mongoose.model<WhitelistPlayer>(
+    process.env.WHITELIST_COLLECTION_NAME!!,
+    WhitelistSchema,
+    process.env.WHITELIST_COLLECTION_NAME!!)
