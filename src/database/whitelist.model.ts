@@ -1,5 +1,8 @@
+import { config } from "dotenv";
 import * as mongoose from "mongoose";
 import { Document, Schema } from "mongoose";
+
+config() //Because this file runs before the index file runs 
 
 export interface WhitelistPlayer extends Document {
     id: string,

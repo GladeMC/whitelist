@@ -14,6 +14,10 @@ export const connectToMongoDB = async () => {
     }
 }
 
+export const getPlayerCount = async () => {
+    return await whitelistModel.count()
+}
+
 export const getPlayerById = async (id: Snowflake): Promise<WhitelistPlayer | null> => {
     return await whitelistModel.findOne({ id })
 }
@@ -26,6 +30,10 @@ export const createPlayer = async (id: Snowflake, uuid: string): Promise<Whiteli
     return await whitelistModel.create({ id, uuid, registeredAt: new Date() })
 }
 
+export const deletePlayerById = async (id: Snowflake) => {
+    await whitelistModel.deleteOne({ id })
+}
+
 export const deletePlayer = async (id: Snowflake, uuid: string) => {
-    await whitelistModel.deleteOne({ id, uuid })
+    await whitelistModel.deleteOne({ id })
 }

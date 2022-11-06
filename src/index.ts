@@ -2,7 +2,9 @@ import { Client, GatewayIntentBits } from "discord.js"
 import { config } from "dotenv"
 import { connectToMongoDB } from "./database/database"
 import { registerButtonListeners } from "./listener/button.listener"
+import { registerLeaveListeners } from "./listener/leave.listener"
 import { registerMessageListeners } from "./listener/message.listener"
+
 
 async function start() {
     await connectToMongoDB()
@@ -18,6 +20,7 @@ async function start() {
 
     registerMessageListeners(client)
     registerButtonListeners(client)
+    registerLeaveListeners(client)
 
     await client.login(process.env.DISCORD_TOKEN!!)
 }

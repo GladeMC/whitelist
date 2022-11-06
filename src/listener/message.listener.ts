@@ -1,6 +1,6 @@
 import { EmbedBuilder } from "@discordjs/builders";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Client, Colors, Embed, Message, TextChannel, User } from "discord.js";
-import { createPlayer, getPlayerById } from "../database/database";
+import { createPlayer, getPlayerById, getPlayerCount } from "../database/database";
 import { fetchUUID } from "../util/mojang";
 
 export const registerMessageListeners = (client: Client) => {
@@ -24,13 +24,18 @@ export const registerMessageListeners = (client: Client) => {
             embeds: [new EmbedBuilder()
                 .setTitle("Neuer Spieler")
                 .setDescription("Der Spieler `" + name + "` hat sich registriert.")
-                .addFields({
-                    name: "UUID",
-                    value: uuid,
-                },
+                .addFields(
+                    {
+                        name: "UUID",
+                        value: uuid,
+                    },
                     {
                         name: "Discord",
                         value: user.toString()
+                    },
+                    {
+                        name: "Spieleranzahl",
+                        value: (await getPlayerCount()).toString()
                     })
                 .setThumbnail(`https://crafatar.com/avatars/${uuid}`)
                 .setColor(Colors.Green)],
