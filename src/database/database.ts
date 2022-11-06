@@ -1,7 +1,7 @@
 import { Snowflake } from "discord.js"
 import { connect } from "mongoose"
 import { exit } from "process"
-import playerModel, { Player } from "./player.model"
+import whitelistModel, { WhitelistPlayer } from "./whitelist.model"
 
 export const connectToMongoDB = async () => {
     console.log("Trying to connect to MongoDB")
@@ -14,18 +14,18 @@ export const connectToMongoDB = async () => {
     }
 }
 
-export const getPlayerById = async (id: Snowflake): Promise<Player | null> => {
-    return await playerModel.findOne({ id })
+export const getPlayerById = async (id: Snowflake): Promise<WhitelistPlayer | null> => {
+    return await whitelistModel.findOne({ id })
 }
 
-export const getPlayerByUUID = async (uuid: string): Promise<Player | null> => {
-    return await playerModel.findOne({ uuid })
+export const getPlayerByUUID = async (uuid: string): Promise<WhitelistPlayer | null> => {
+    return await whitelistModel.findOne({ uuid })
 }
 
-export const createPlayer = async (id: Snowflake, uuid: string): Promise<Player> => {
-    return await playerModel.create({ id, uuid, registeredAt: new Date() })
+export const createPlayer = async (id: Snowflake, uuid: string): Promise<WhitelistPlayer> => {
+    return await whitelistModel.create({ id, uuid, registeredAt: new Date() })
 }
 
 export const deletePlayer = async (id: Snowflake, uuid: string) => {
-    await playerModel.deleteOne({ id, uuid })
+    await whitelistModel.deleteOne({ id, uuid })
 }

@@ -1,13 +1,13 @@
 import * as mongoose from "mongoose";
 import { Document, Schema } from "mongoose";
 
-export interface Player extends Document {
+export interface WhitelistPlayer extends Document {
     id: string,
     registeredAt: Date,
     uuid: string
 }
 
-const PlayerSchema: Schema = new Schema({
+const WhitelistSchema: Schema = new Schema({
     id: {
         type: String,
         required: true,
@@ -24,4 +24,4 @@ const PlayerSchema: Schema = new Schema({
     }
 });
 
-export default mongoose.model<Player>("whitelist_players", PlayerSchema, "whitelist_players")
+export default mongoose.model<WhitelistPlayer>("whitelist", WhitelistSchema, "whitelist")
